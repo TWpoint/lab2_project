@@ -1,12 +1,11 @@
-from torchvision import datasets
-from torchvision.transforms import ToTensor
-import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader as DataLoader
+import matplotlib.pyplot as plt
 from torch import optim
+from torchvision import datasets
 from torch.autograd import Variable
-import math
+from torchvision.transforms import ToTensor
+from torch.utils.data import DataLoader as DataLoader
 
 
 def visualize():
@@ -103,6 +102,7 @@ def test():
 
 
 if __name__ == '__main__':
+    # load data
     train_data = datasets.MNIST(root='data', train=True, transform=ToTensor(), download=True)
     test_data = datasets.MNIST(root='data', train=False, transform=ToTensor())
     loaders = {
@@ -112,10 +112,12 @@ if __name__ == '__main__':
 
     # visualize()
 
+    # instantiation
     hyperparameters = Hyperparameters(a=20, b=(2, 2), c=1, d=0, e=2, f=10)
     cnn = CNN()
     loss_func = nn.CrossEntropyLoss()
     optimizer = optim.Adam(cnn.parameters(), lr=0.01)
 
+    # train & test
     num_epoch = 20
     train(num_epoch=num_epoch, cnn=cnn, loaders=loaders)
