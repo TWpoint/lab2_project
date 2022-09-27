@@ -67,7 +67,6 @@ class CNN(nn.Module):
         x = self.conv1(x)
         x = self.conv2(x)
         x = x.view(x.size(0), -1)
-
         output = self.out(x)
         return output, x
 
@@ -110,8 +109,9 @@ if __name__ == '__main__':
         'train': DataLoader(train_data, batch_size=100, shuffle=True, num_workers=1),
         'test': DataLoader(test_data, batch_size=100, shuffle=True, num_workers=1)
     }
-    a, b = next(iter(loaders['train']))
+
     # visualize()
+
     hyperparameters = Hyperparameters(a=20, b=(2, 2), c=1, d=0, e=2, f=10)
     cnn = CNN()
     loss_func = nn.CrossEntropyLoss()
